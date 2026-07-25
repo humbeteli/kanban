@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kanban Tapşırıq Lövhəsi</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="https://cdn-icons-png.flaticon.com/128/10387/10387097.png"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="#" class="logo">K</a>
+        <p class="logo--name">Kanban İdarəetmə</p>
+      </nav>
+      <div class="toolbar">
+        <input type="search" placeholder="Tapşırıq axınında axtar" />
+        <select name="priority" id="priority-filter">
+          <option value="all">🚀 Bütün prioritetlər</option>
+          <option value="low">🟢 Aşağı</option>
+          <option value="medium">🟡 Orta</option>
+          <option value="high">🔴 Yüksək</option>
+        </select>
+        <button class="newtask">+ Yeni Tapşırıq</button>
+      </div>
+    </header>
+
+    <main class="board">
+      <section class="column" data-status="todo">
+        <div class="column-header">
+          <div class="column--title">
+            <h2>⚫ Gözləmədə</h2>
+            <p class="count">0</p>
+          </div>
+        </div>
+        <hr />
+        <div class="task-list" data-status="todo">
+          <p class="empty-message">Burada tapşırıq yoxdur</p>
+        </div>
+      </section>
+
+      <section class="column" data-status="doing">
+        <div class="column-header">
+          <div class="column--title">
+            <h2>🟡 İcra olunur</h2>
+            <p class="count">0</p>
+          </div>
+        </div>
+        <hr />
+        <div class="task-list" data-status="doing">
+          <p class="empty-message">Burada tapşırıq yoxdur</p>
+        </div>
+      </section>
+
+      <section class="column" data-status="done">
+        <div class="column-header">
+          <div class="column--title">
+            <h2>🟢 Tamamlandı</h2>
+            <p class="count">0</p>
+          </div>
+        </div>
+        <hr />
+        <div class="task-list" data-status="done">
+          <p class="empty-message">Burada tapşırıq yoxdur</p>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal-overlay" id="task-modal" hidden>
+      <div class="modal">
+        <h2 id="modal-title">Yeni Tapşırıq</h2>
+        <form id="task-form">
+          <div class="form-group">
+            <label for="title">Başlıq *</label>
+            <input type="text" id="title" name="title" required />
+          </div>
+
+          <div class="form-group">
+            <label for="description">Açıqlama</label>
+            <textarea
+              id="description"
+              name="description"
+              placeholder="Tapşırıq haqqında qısa qeyd..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="priority">Prioritet dərəcəsi</label>
+            <select id="priority" name="priority">
+              <option value="low">Aşağı (Low)</option>
+              <option value="medium">Orta (Medium)</option>
+              <option value="high">Yüksək (High)</option>
+            </select>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" id="cancel-btn">Ləğv et</button>
+            <button type="submit">Yadda saxla</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
