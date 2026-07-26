@@ -36,6 +36,7 @@ let tasks = [
 ];
 
 let editingId = null;
+let draggedId = null;
 
 const priorityLabels = { low: "AŞAĞI", medium: "ORTA", high: "YÜKSƏK" };
 
@@ -43,6 +44,16 @@ function createTaskCard(task) {
   const card = document.createElement("div");
   card.classList.add("task-card");
   card.dataset.id = task.id;
+  card.draggable = true;
+
+  card.addEventListener("dragstart", () => {
+    card.classList.add("dragging");
+    draggedId = task.id;
+  });
+
+  card.addEventListener("dragend", () => {
+    card.classList.remove("dragging");
+  });
 
   const badge = document.createElement("span");
   badge.classList.add("badge", `badge--${task.priority}`);
@@ -176,4 +187,22 @@ form.addEventListener("submit", (e) => {
   renderTasks();
   modal.hidden = true;
   form.reset();
+});
+
+Object.values(taskLists).forEach((list) => {
+  list.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    list.classList.add("drag-over");
+  });
+
+  list.addEventListener("dragleave", () => {
+    list.classList.remove("drag-over");
+  });
+
+  list.addEventListener("drop", () => {
+    list.classList.remove("drag-over");
+    const task = tasks.find((t) => t.id === draggedId);
+    task.status = list.dataset.status;
+    renderTasks();
+  });
 });

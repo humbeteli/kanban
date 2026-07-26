@@ -118,6 +118,8 @@ select {
   border-radius: 8px;
   padding: 16px;
   min-height: 500px;
+  display: flex;
+  flex-direction: column;
 }
 
 .column-header {
@@ -160,6 +162,7 @@ select {
   max-height: 450px;
   overflow-y: auto;
   scrollbar-width: thin;
+  flex: 1;
 }
 
 .task-list::-webkit-scrollbar {
@@ -173,6 +176,16 @@ select {
 
 .task-list::-webkit-scrollbar-track {
   background: transparent;
+}
+
+.task-list.drag-over {
+    background-color: rgba(89, 99, 250, 0.05);
+    border: 2px dashed #5963fa;
+    border-radius: 8px;
+}
+
+.task-card.dragging {
+    opacity: 0.4;
 }
 
 .empty-message {
