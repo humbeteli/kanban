@@ -47,4 +47,4 @@ cd kanban
 
 ### Mobile
 
-![Mobile](./screenshots/mobile.png)
+![Mobile](./screenshots/mobile.jpeg)
