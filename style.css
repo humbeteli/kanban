@@ -179,13 +179,13 @@ select {
 }
 
 .task-list.drag-over {
-    background-color: rgba(89, 99, 250, 0.05);
-    border: 2px dashed #5963fa;
-    border-radius: 8px;
+  background-color: rgba(89, 99, 250, 0.05);
+  border: 2px dashed #5963fa;
+  border-radius: 8px;
 }
 
 .task-card.dragging {
-    opacity: 0.4;
+  opacity: 0.4;
 }
 
 .empty-message {
@@ -354,4 +354,31 @@ select {
 
 #task-form button[type="submit"]:hover {
   box-shadow: 0 0 20px rgba(89, 99, 250, 0.6);
+}
+
+@media (max-width: 768px) {
+  header {
+    margin: 20px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .toolbar {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .toolbar input,
+  .toolbar select,
+  .newtask {
+    width: 100%;
+  }
+
+  .board {
+    flex-direction: column;
+  }
+
+  .column {
+    min-height: auto;
+  }
 }
