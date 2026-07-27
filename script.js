@@ -10,30 +10,7 @@ const counts = {
   done: document.querySelector('[data-status="done"] .count'),
 };
 
-let tasks = [
-  {
-    id: 1,
-    title: "DEVJOINT",
-    description: "Frontend",
-    priority: "low",
-    status: "todo",
-  },
-  {
-    id: 2,
-    title: "API inteqrasiyası",
-    description: "",
-    priority: "high",
-    status: "doing",
-  },
-
-  {
-    id: 3,
-    title: "Checkpoint 1",
-    description: "Tamamlanır",
-    priority: "medium",
-    status: "done",
-  },
-];
+let tasks = [];
 
 let editingId = null;
 let draggedId = null;
@@ -138,8 +115,10 @@ function renderTasks() {
     counts[status].textContent = columnTasks.length;
     taskLists[status].scrollTop = taskLists[status].scrollHeight;
   });
-}
 
+  saveTask();
+}
+loadTask()
 renderTasks();
 
 const modal = document.getElementById("task-modal");
@@ -206,3 +185,14 @@ Object.values(taskLists).forEach((list) => {
     renderTasks();
   });
 });
+
+function saveTask() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function loadTask() {
+  const saved = localStorage.getItem("tasks");
+  if (saved) {
+    tasks = JSON.parse(saved);
+  }
+}
