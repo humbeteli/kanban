@@ -98,8 +98,22 @@ function createTaskCard(task) {
 function renderTasks() {
   Object.values(taskLists).forEach((list) => (list.innerHTML = ""));
 
+  const searchValue = searchInput.value.toLowerCase().trim();
+  const selectedPriority = priorityFilter.value;
+
   ["todo", "doing", "done"].forEach((status) => {
-    const columnTasks = tasks.filter((t) => t.status === status);
+    const columnTasks = tasks.filter((task) => {
+      const sameStatus = task.status === status;
+
+      const matchesSearch =
+        task.title.toLowerCase().includes(searchValue) ||
+        task.description.toLowerCase().includes(searchValue);
+
+      const matchesPriority =
+        selectedPriority === "all" || task.priority === selectedPriority;
+
+      return sameStatus && matchesSearch && matchesPriority;
+    });
 
     if (columnTasks.length === 0) {
       const empty = document.createElement("p");
@@ -118,8 +132,6 @@ function renderTasks() {
 
   saveTask();
 }
-loadTask()
-renderTasks();
 
 const modal = document.getElementById("task-modal");
 const addBtn = document.querySelector(".newtask");
@@ -128,6 +140,8 @@ const form = document.getElementById("task-form");
 const titleInput = document.getElementById("title");
 const descInput = document.getElementById("description");
 const priorityInput = document.getElementById("priority");
+const searchInput = document.getElementById("search-input");
+const priorityFilter = document.getElementById("priority-filter");
 
 addBtn.addEventListener("click", () => {
   editingId = null;
@@ -168,6 +182,14 @@ form.addEventListener("submit", (e) => {
   form.reset();
 });
 
+searchInput.addEventListener("input", () => {
+  renderTasks();
+});
+
+priorityFilter.addEventListener("change", () => {
+  renderTasks();
+});
+
 Object.values(taskLists).forEach((list) => {
   list.addEventListener("dragover", (e) => {
     e.preventDefault();
@@ -196,3 +218,6 @@ function loadTask() {
     tasks = JSON.parse(saved);
   }
 }
+
+loadTask();
+renderTasks();
