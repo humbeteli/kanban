@@ -159,6 +159,18 @@ cancelBtn.addEventListener("click", () => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
+  const dublicate = tasks.some((task) => {
+  return (
+    task.title.toLowerCase().trim() === titleInput.value.toLowerCase().trim() &&
+    task.id !== editingId
+  );
+});
+
+  if (dublicate) {
+    alert("Bu tapşırıq artıq əlavə edilib.");
+    return;
+  }
+
   if (editingId === null) {
     const newTask = {
       id: Date.now(),
